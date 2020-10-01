@@ -7,40 +7,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let acceptTimer;
   let cancelTimer;
-  acceptBtn.addEventListener("click", () => {
-    popTop.style.left = "68%";
+
+  function showTopPopup() {
+    popTop.classList.remove("hide");
+    popTop.classList.add("show");
 
     acceptTimer = setTimeout(function () {
-      popTop.style.left = "100%";
+      popTop.classList.remove("show");
+      popTop.classList.add("hide");
       openTop = false;
     }, 8000);
+  }
+  acceptBtn.addEventListener("click", () => {
+    showTopPopup();
   });
 
   acceptBtn.addEventListener("touchend", () => {
-    popTop.style.left = "68%";
-
-    acceptTimer = setTimeout(function () {
-      popTop.style.left = "100%";
-      openTop = false;
-    }, 8000);
+    showTopPopup();
   });
 
-  cancelBtn.addEventListener("click", () => {
-    popBottom.style.left = "68%";
+  function showBottomPopup() {
+    popBottom.classList.remove("hide");
+    popBottom.classList.add("show");
 
-    cancelTimer = setTimeout(function () {
-      popBottom.style.left = "100%";
-      openBtm = false;
+    acceptTimer = setTimeout(function () {
+      popBottom.classList.remove("show");
+      popBottom.classList.add("hide");
+      openTop = false;
     }, 8000);
+  }
+  cancelBtn.addEventListener("click", () => {
+    showBottomPopup();
   });
 
   cancelBtn.addEventListener("touchend", () => {
-    popBottom.style.left = "68%";
-
-    cancelTimer = setTimeout(function () {
-      popBottom.style.left = "100%";
-      openBtm = false;
-    }, 8000);
+    showBottomPopup();
   });
 
   document.addEventListener("click", (e) => {
@@ -52,8 +53,10 @@ document.addEventListener("DOMContentLoaded", () => {
     ) {
       clearTimeout(acceptTimer);
       clearTimeout(cancelTimer);
-      popTop.style.left = "100%";
-      popBottom.style.left = "100%";
+      popTop.classList.remove("show");
+      popTop.classList.add("hide");
+      popBottom.classList.remove("show");
+      popBottom.classList.add("hide");
     }
   });
 });
